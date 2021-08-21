@@ -28,6 +28,13 @@ public:
     }
 };
 
+class FlyRocketPowered: public FlyBehavior {
+public:
+    void fly() {
+        cout << "I'm flying with a rocket!" << endl;
+    }
+};
+
 class Quack: public QuackBehavior {
 public: 
     void quack() {
@@ -63,6 +70,14 @@ public:
         cout << "All ducks float, even decoys" << endl;
     }
 
+    void setFlyBehavior(FlyBehavior *fb) {
+        flyBehavior = fb;
+    }
+
+    void setQuackBehavior(QuackBehavior *qb) {
+        quackBehavior = qb;
+    }
+
 public:
     FlyBehavior *flyBehavior;
     QuackBehavior *quackBehavior;
@@ -73,6 +88,14 @@ class MallardDuck: public Duck {
 public:
     MallardDuck();
     ~MallardDuck();
+    void display();
+
+};
+
+class ModelDuck: public Duck {
+public:
+    ModelDuck();
+    ~ModelDuck();
     void display();
 
 };

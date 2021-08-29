@@ -1,15 +1,15 @@
 #include "pizza.h"
 
-void Pizza::prepare() {
-    cout << "Preparing" << name << endl;
-    cout << "Tossing dough..." << endl;
-    cout << "Adding sauce..." << endl;
-    cout << "Adding toppings: " << endl;
-    for (auto topping : toppings)
-    {
-        cout << topping << " ";
-    }
-}
+// void Pizza::prepare() {
+//     cout << "Preparing" << name << endl;
+//     cout << "Tossing dough..." << endl;
+//     cout << "Adding sauce..." << endl;
+//     cout << "Adding toppings: " << endl;
+//     for (auto topping : toppings)
+//     {
+//         cout << topping << " ";
+//     }
+// }
 
 void Pizza::bake() {
     cout << "Bake for 25 minutes at 350"<< endl;
@@ -27,17 +27,83 @@ string Pizza::getName() {
     return name;
 }
 
-NYStyleCheesePizza::NYStyleCheesePizza() 
+Dough* NYPizzaIngredientFactory::createDough()
+{
+    return new NewYorkDough();
+}
+
+Sauce* NYPizzaIngredientFactory::createSauce()
+{
+    return new NewYorkSauce();
+}
+
+Cheese* NYPizzaIngredientFactory::createCheese()
+{
+    return new NewYorkCheese();
+}
+
+vector<Veggies*> NYPizzaIngredientFactory::createVeggies()
+{
+    vector<Veggies*> veggies;
+    veggies.push_back(new NewYorkVeggies());
+    return veggies;
+}
+
+Pepperoni* NYPizzaIngredientFactory::createPepperoni()
+{
+    return new NewYorkPepperoni();
+}
+
+Clams* NYPizzaIngredientFactory::createClams()
+{
+    return new NewYorkClams();
+}
+
+Dough* ChicagoPizzaIngredientFactory::createDough()
+{
+    return new ChicagoDough();
+}
+
+Sauce* ChicagoPizzaIngredientFactory::createSauce()
+{
+    return new ChicagoSauce();
+}
+
+Cheese* ChicagoPizzaIngredientFactory::createCheese()
+{
+    return new ChicagoCheese();
+}
+
+vector<Veggies*> ChicagoPizzaIngredientFactory::createVeggies()
+{
+    vector<Veggies*> veggies;
+    veggies.push_back(new ChicagoVeggies());
+    return veggies;
+}
+
+Pepperoni* ChicagoPizzaIngredientFactory::createPepperoni()
+{
+    return new ChicagoPepperoni();
+}
+
+Clams* ChicagoPizzaIngredientFactory::createClams()
+{
+    return new ChicagoClams();
+}
+
+NYStyleCheesePizza::NYStyleCheesePizza(PizzaIngredientFactory *ingredientFactory) 
 {
     name = "NY Style Sauce and Cheese Pizza";
-    dough = "Thin Crust Dough";
-    sauce = "Marinara Sauce";
-    toppings.push_back("Grated Reggiano Cheese");
+    this->ingredientFactory = ingredientFactory;
 }
 
 void NYStyleCheesePizza::prepare() 
 {
-    Pizza::prepare();
+    cout << "Preparing " << name << endl;
+    dough = ingredientFactory->createDough();
+    sauce = ingredientFactory->createSauce();
+    cheese = ingredientFactory->createCheese();
+    clam = ingredientFactory->createClams();
 }
 
 void NYStyleCheesePizza::bake() 
@@ -59,17 +125,19 @@ string NYStyleCheesePizza::getName() {
     return Pizza::getName();
 }
 
-ChicagoStyleCheesePizza::ChicagoStyleCheesePizza() 
+ChicagoStyleCheesePizza::ChicagoStyleCheesePizza(PizzaIngredientFactory *ingredientFactory) 
 {
     name = "Chicago Style Deep Dish Cheese Pizza";
-    dough = "Extra Thick Crust Dough";
-    sauce = "Plum Tomato Sauce";
-    toppings.push_back("Shredded Mozzarella Cheese");
+    this->ingredientFactory = ingredientFactory;
 }
 
 void ChicagoStyleCheesePizza::prepare() 
 {
-    Pizza::prepare();
+    cout << "Preparing " << name << endl;
+    dough = ingredientFactory->createDough();
+    sauce = ingredientFactory->createSauce();
+    cheese = ingredientFactory->createCheese();
+    clam = ingredientFactory->createClams();
 }
 
 void ChicagoStyleCheesePizza::bake() 
@@ -105,12 +173,18 @@ Pizza* PizzaStore::orderPizza()
 
 Pizza* NYStylePizzaStore::createPizza()
 {
-    return new NYStyleCheesePizza();
+    Pizza* pizza = nullptr;
+    PizzaIngredientFactory *ingredientFactory = new NYPizzaIngredientFactory();
+    pizza = new NYStyleCheesePizza(ingredientFactory);
+    return pizza;
 }
 
 Pizza* ChicagoStylePizzaStore::createPizza()
 {
-    return new ChicagoStyleCheesePizza();
+    Pizza* pizza = nullptr;
+    PizzaIngredientFactory *ingredientFactory = new ChicagoPizzaIngredientFactory();
+    pizza = new ChicagoStyleCheesePizza(ingredientFactory);
+    return pizza;
 }
 
 int main()

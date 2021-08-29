@@ -4,3 +4,4 @@ pizza:pizza.o
 
 pizza.o:pizza.cpp pizza.h
 	g++ -c pizza.cpp -o pizza.o
+

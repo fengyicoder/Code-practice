@@ -1,0 +1,21 @@
+
+CXX = g++
+CFLAGS = -Wall
+LDFLAGS = -pthread
+
+target = _main
+srcs = main.cpp 
+objs = $(srcs:.cpp=.o)
+
+.PHONY: all
+all: $(target)
+
+$(target): $(objs)
+	$(CXX) $(LDFLAGS) -o _main $^
+
+$(objs):%.o:%.cpp
+	$(CXX) $(LDFLAGS) -c -o $@ $<
+
+clean:
+	rm -f _main *.o
+

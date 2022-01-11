@@ -129,3 +129,94 @@ ListNode* reverseBetween(ListNode* head, int left, int right) {
     head->next = reverseBetween(head->next, left-1, right-1);
     return head;
 }
+
+//Leetcode 25 K个一组翻转链表
+ListNode* reverseKGroup(ListNode* head, int k) {
+    if (!head) return nullptr;
+    ListNode *a, *b;
+    a = b = head;
+    for (int i=0; i<k; i++) {
+        if (!b) return head;
+        b = b->next;
+    }
+    ListNode *newHead = reverse(a, b);
+    a->next = reverseKGroup(b, k);
+    return newHead;
+}
+
+ListNode* reverse(ListNode *a, ListNode *b) {
+    ListNode *pre, *cur, *next;
+    pre = NULL;
+    cur = next = a;
+    while (cur != b) {
+        next = cur->next;
+        cur->next = pre;
+        pre = cur;
+        cur = next;
+    }
+    return pre;
+}
+
+//LeetCode 234 回文链表
+//启发
+void traverse(ListNode head) {
+    // 前序遍历代码
+    traverse(head.next);
+    // 后序遍历代码
+}
+/* 倒序打印单链表中的元素值 */
+void traverse(ListNode head) {
+    if (head == null) return;
+    traverse(head.next);
+    // 后序遍历代码
+    print(head.val);
+}
+
+//一种实现
+// 左侧指针
+ListNode left;
+
+boolean isPalindrome(ListNode head) {
+    left = head;
+    return traverse(head);
+}
+
+boolean traverse(ListNode right) {
+    if (right == null) return true;
+    boolean res = traverse(right.next);
+    // 后序遍历代码
+    res = res && (right.val == left.val);
+    left = left.next;
+    return res;
+}
+
+//采用快慢指针的思想改进
+bool isPalindrome(ListNode* head) {
+    ListNode *slow, *fast;
+    slow = fast = head;
+    while (fast && fast->next) {
+        slow = slow->next;
+        fast = fast->next->next;
+    }
+    if (fast) slow = slow->next;
+    ListNode *left = head;
+    ListNode *right = reverse(slow);
+    while (right) {
+        if (left->val != right->val) return false;
+        left = left->next;
+        right = right->next;
+    }
+    return true;
+}
+
+ListNode* reverse(ListNode *head) {
+    ListNode *pre, *cur;
+    pre = nullptr, cur = head;
+    while (cur != nullptr) {
+        ListNode *next = cur->next;
+        cur->next = pre;
+        pre = cur;
+        cur = next;
+    }
+    return pre;
+}

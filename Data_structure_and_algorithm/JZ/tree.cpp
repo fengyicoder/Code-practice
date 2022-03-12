@@ -54,7 +54,7 @@ bool HasSubtree(TreeNode* pRoot1, TreeNode* pRoot2)
 {
     if (!pRoot1 || !pRoot2) return false;
     if (dfs(pRoot1, pRoot2)) return true;
-    return dfs(pRoot1->left, pRoot2) || dfs(pRoot1->right, pRoot2);
+    return HasSubtree(pRoot1->left, pRoot2) || HasSubtree(pRoot1->right, pRoot2);
 }
 bool dfs(TreeNode* pRoot1, TreeNode* pRoot2) {
     if (!pRoot2) return true;

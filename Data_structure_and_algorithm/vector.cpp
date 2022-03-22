@@ -327,7 +327,7 @@ void reverseString(vector<char>& s) {
     }
 }
 
-//Leetcode 76 最小覆盖字串
+//Leetcode 76 最小覆盖子串
 string minWindow(string s, string t) {
     unordered_map<char, int> need, window;
     int valid = 0, start = 0, len = INT_MAX;

@@ -73,23 +73,32 @@ ListNode* EntryNodeOfLoop(ListNode* pHead)
 }
 
 //JZ35 复杂链表的复制
-ListNode* EntryNodeOfLoop(ListNode* pHead)
+RandomListNode* Clone(RandomListNode* pHead)
 {
-    if (!pHead || !pHead->next) return nullptr;
-    auto p1 = pHead, p2 = pHead;
-    while (p1 && p2) {
-        p1 = p1->next;
-        p2 = p2->next;
-        if (p2) p2 = p2->next;
-        if (p1 == p2) {
-            p1 = pHead;
-            while (p1 != p2) {
-                p1 = p1->next;
-                p2 = p2->next;
-            }
-            return p2;
-        }
+    auto p = pHead;
+    while (p) {
+        auto next = p->next;
+        auto temp = new RandomListNode(p->label);
+        p->next = temp;
+        temp->next = next;
+        p = next;
     }
+    p = pHead;
+    while (p) {
+        p->next->random = p->random == nullptr ? nullptr : p->random->next;
+        p = p->next->next;
+    }
+    auto dummy = new RandomListNode(-1);
+    auto cur = dummy;
+    p = pHead;
+    while (p) {
+        auto pre = p;
+        cur->next = p->next;
+        cur = cur->next;
+        p = p->next->next;
+        pre->next = p;
+    }
+    return dummy->next;
 }
 
 //JZ76 删除链表中重复的结点

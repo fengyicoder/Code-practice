@@ -82,7 +82,7 @@ int FirstNotRepeatingChar(string str) {
     }
     return -1;
 }
-//JZ39 数组中出席那次数超过一半的数字
+//JZ39 数组中出现次数超过一半的数字
 def MoreThanHalfNum_Solution(self, numbers):
     hash = {};
     n = len(numbers)

@@ -1,0 +1,7 @@
+D:/project/Code-practice/utils/log/test/build/CMakeFiles/pr_test.dir
+D:/project/Code-practice/utils/log/test/build/CMakeFiles/q_test.dir
+D:/project/Code-practice/utils/log/test/build/CMakeFiles/log_level_test.dir
+D:/project/Code-practice/utils/log/test/build/CMakeFiles/log_level_async.dir
+D:/project/Code-practice/utils/log/test/build/CMakeFiles/log_level_sync.dir
+D:/project/Code-practice/utils/log/test/build/CMakeFiles/edit_cache.dir
+D:/project/Code-practice/utils/log/test/build/CMakeFiles/rebuild_cache.dir

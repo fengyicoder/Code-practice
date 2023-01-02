@@ -1,4 +1,0 @@
-D:/project/Code-practice/utils/memory/test/build/CMakeFiles/mem_test.dir
-D:/project/Code-practice/utils/memory/test/build/CMakeFiles/buf_test.dir
-D:/project/Code-practice/utils/memory/test/build/CMakeFiles/edit_cache.dir
-D:/project/Code-practice/utils/memory/test/build/CMakeFiles/rebuild_cache.dir

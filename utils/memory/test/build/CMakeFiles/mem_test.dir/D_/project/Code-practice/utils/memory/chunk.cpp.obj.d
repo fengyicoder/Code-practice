@@ -1,0 +1,35 @@
+CMakeFiles/mem_test.dir/D_/project/Code-practice/utils/memory/chunk.cpp.obj: \
+ D:\project\Code-practice\utils\memory\chunk.cpp \
+ D:/softwarepacket/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/cassert \
+ D:/softwarepacket/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/x86_64-w64-mingw32/bits/c++config.h \
+ D:/softwarepacket/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/x86_64-w64-mingw32/bits/os_defines.h \
+ D:/softwarepacket/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/x86_64-w64-mingw32/bits/cpu_defines.h \
+ D:/softwarepacket/mingw64/x86_64-w64-mingw32/include/assert.h \
+ D:/softwarepacket/mingw64/x86_64-w64-mingw32/include/crtdefs.h \
+ D:/softwarepacket/mingw64/x86_64-w64-mingw32/include/_mingw.h \
+ D:/softwarepacket/mingw64/x86_64-w64-mingw32/include/_mingw_mac.h \
+ D:/softwarepacket/mingw64/x86_64-w64-mingw32/include/_mingw_secapi.h \
+ D:/softwarepacket/mingw64/x86_64-w64-mingw32/include/vadefs.h \
+ D:/softwarepacket/mingw64/x86_64-w64-mingw32/include/sdks/_mingw_directx.h \
+ D:/softwarepacket/mingw64/x86_64-w64-mingw32/include/sdks/_mingw_ddk.h \
+ D:/softwarepacket/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/stdlib.h \
+ D:/softwarepacket/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/cstdlib \
+ D:/softwarepacket/mingw64/x86_64-w64-mingw32/include/stdlib.h \
+ D:/softwarepacket/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include-fixed/limits.h \
+ D:/softwarepacket/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include-fixed/syslimits.h \
+ D:/softwarepacket/mingw64/x86_64-w64-mingw32/include/limits.h \
+ D:/softwarepacket/mingw64/x86_64-w64-mingw32/include/sec_api/stdlib_s.h \
+ D:/softwarepacket/mingw64/x86_64-w64-mingw32/include/malloc.h \
+ D:/softwarepacket/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/bits/std_abs.h \
+ D:/softwarepacket/mingw64/x86_64-w64-mingw32/include/memory.h \
+ D:/softwarepacket/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/cstdio \
+ D:/softwarepacket/mingw64/x86_64-w64-mingw32/include/stdio.h \
+ D:/softwarepacket/mingw64/x86_64-w64-mingw32/include/_mingw_print_push.h \
+ D:/softwarepacket/mingw64/x86_64-w64-mingw32/include/_mingw_off_t.h \
+ D:/softwarepacket/mingw64/x86_64-w64-mingw32/include/swprintf.inl \
+ D:/softwarepacket/mingw64/x86_64-w64-mingw32/include/sec_api/stdio_s.h \
+ D:/softwarepacket/mingw64/x86_64-w64-mingw32/include/_mingw_print_pop.h \
+ D:/softwarepacket/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/cstring \
+ D:/softwarepacket/mingw64/x86_64-w64-mingw32/include/string.h \
+ D:/softwarepacket/mingw64/x86_64-w64-mingw32/include/sec_api/string_s.h \
+ D:\project\Code-practice\utils\memory\chunk.h

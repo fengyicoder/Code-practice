@@ -95,9 +95,9 @@ bool Logger::init(const char* file_name, int buffer_queue_size, log_level level,
         return false;
     }
     else {
-        strcpy(file_name_, p);
+        strcpy(file_name_, p+1);
         strncpy(dir_name_, file_name, p-file_name+1);
-        snprintf(log_file_fullname, 267, "%s%04d_$02d_%02d_%s", dir_name_, tm.year, tm.month, tm.day, file_name_);
+        snprintf(log_file_fullname, 267, "%s%04d_%02d_%02d_%s", dir_name_, tm.year, tm.month, tm.day, file_name_);
         fp_ = fopen(log_file_fullname, "a");
     }
     if (fp_ == NULL) {

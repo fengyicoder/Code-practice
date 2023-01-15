@@ -1,6 +1,6 @@
 #include <atomic>
 
-#include "../timer.h"
+#include "timer.h"
 #include "log.h"
 #include "pr.h"
 

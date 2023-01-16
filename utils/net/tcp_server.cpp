@@ -22,8 +22,8 @@ TcpServer::TcpServer(EventLoop* loop, const char *ip, uint16_t port) {
     this->port_ = port;
     ts_message_cb_ = [this](const TcpConnSP& conn, InputBuffer* ibuf) {
         updateConnTimeoutTime(conn);
-        if (ts_msg_cb) ts_msg_cb(conn, ibuf);
-    }
+        if (ts_msg_cb_) ts_msg_cb_(conn, ibuf);
+    };
     ts_acceptor_ = std::make_unique<Acceptor>(this, loop, ip, port);
 }
 
@@ -49,12 +49,12 @@ EventLoop* TcpServer::getNextLoop() {
     int size;
     if (size == ts_conn_loops_.size(); size==0) { return nullptr; }
     ++ts_next_loop_;
-    ts_next_loop_ = ts_acceptor_loop_ % size;
+    ts_next_loop_ = ts_next_loop_ % size;
     return ts_conn_loops_[ts_next_loop_];
 }
 
 void TcpServer::doClean(const TcpConnSP& tcp_conn) {
-    std::lock_guard<std::mutex> lock(mutex);
+    std::lock_guard<std::mutex> lock(ts_mutex_);
     for (auto i=ts_tcp_connections_.begin(), e=ts_tcp_connections_.end(); i!=e; ++i) {
         if (tcp_conn == *i) {
             LOG_INFO("tcpserver do clean, erase tcp_conn\n");

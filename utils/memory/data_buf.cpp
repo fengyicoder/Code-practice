@@ -39,7 +39,7 @@ int InputBuffer::readFromFd(int fd) {
 
     if (data_buf_ == nullptr) {
         data_buf_ = MemPool::getInstance().allocChunk(need_read);
-        if (data_buf == nullptr) {
+        if (data_buf_ == nullptr) {
             PR_INFO("no free buf for alloc\n");
             return -1;
         }
@@ -62,7 +62,7 @@ int InputBuffer::readFromFd(int fd) {
     do {
         if (need_read == 0) already_read = read(fd, data_buf_->data_+data_buf_->length_, m4K);
         else already_read = read(fd, data_buf_->data_+data_buf_->length_, need_read);
-    } while (already_read == -1 && std::errno == EINTR);
+    } while (already_read == -1 && errno == EINTR);
     if (already_read > 0) {
         if (need_read != 0) assert(already_read == need_read);
         data_buf_->length_ += already_read;
@@ -81,7 +81,7 @@ void InputBuffer::adjust() {
 int OutputBuffer::write2buf(const char* data, int len) {
     if (data_buf_ == nullptr) {
         data_buf_ = MemPool::getInstance().allocChunk(len);
-        if (data_buf == nullptr) {
+        if (data_buf_ == nullptr) {
             PR_INFO("no free buf for alloc\n");
             return -1;
         }
@@ -109,13 +109,13 @@ int OutputBuffer::write2fd(int fd) {
     int already_write = 0;
     do {
         already_write = write(fd, data_buf_->data_, data_buf_->length_);
-    } while (already_write == -1 && std::errno == EINTR);
+    } while (already_write == -1 && errno == EINTR);
     if (already_write > 0) {
         data_buf_->pop(already_write);
         data_buf_->adjust();
     }
     
-    if (already_write == -1 && std::errno == EAGAIN) {
+    if (already_write == -1 && errno == EAGAIN) {
         already_write = 0;
     }
 

@@ -28,7 +28,7 @@ private:
     void echo_message_cb(const TcpConnSP& conn, InputBuffer* ibuf) {
         
         const char *msg = ibuf->getFromBuf();
-        string msg_str(msg, msg+ibuf->length());
+        std::string msg_str(msg, msg+ibuf->length());
         ibuf->pop(ibuf->length());
         ibuf->adjust();
     

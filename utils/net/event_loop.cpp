@@ -21,6 +21,14 @@ EventLoop::~EventLoop() {
     close(el_evfd_);
 }
 
+void EventLoop::evfdWakeup() {
+    uint64_t one = 1;
+    if(auto n = write(el_evfd_, &one, sizeof one); n != sizeof one)
+    {
+        PR_ERROR("write %ld bytes to event_fd instead of 8\n", n);
+    }
+}
+
 void EventLoop::evfdRead() {
     uint64_t one = 1;
     if (auto n = read(el_evfd_, &one, sizeof one); n != sizeof one) {

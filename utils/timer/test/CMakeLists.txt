@@ -5,6 +5,7 @@ set(SRCS
     test_timer.cpp
     ../../log/pr.cpp
     ../../log/log.cpp
+    ../../threadpool/thread_pool.cpp
 )
 set(INCS
     ../

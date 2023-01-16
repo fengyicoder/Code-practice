@@ -18,11 +18,18 @@ TcpConnection::TcpConnection(TcpServer* server, EventLoop* loop, int sockfd, str
     tc_loop_ = loop;
     tc_fd_ = sockfd;
 
-    setSockFd(tc_fd);
+    setSockFd(tc_fd_);
 }
 
 TcpConnection::~TcpConnection() {
     LOG_INFO("TcpConnection descontructed, fd is %d\n", tc_fd_);
+}
+
+void TcpConnection::addTask() {
+    LOG_INFO("tcp connection add connected task to poller, conn fd is %d\n", tc_fd_);
+    tc_loop_->addTask([shared_this=shared_from_this()](){ shared_this->connected(); });
+    LOG_INFO("tcp connection add do read to poller, conn fd is %d\n", tc_fd_);
+    tc_loop_->addToPoller(tc_fd_, EPOLLIN, [shared_this=shared_from_this()](){ shared_this->doRead(); });
 }
 
 void TcpConnection::setSockFd(int& fd) {
@@ -68,7 +75,7 @@ void TcpConnection::doWrite() {
     return;
 }
 
-void TcpConnetion::doClose() {
+void TcpConnection::doClose() {
     if (tc_close_cb_) tc_close_cb_();
     tc_loop_->delFromPoller(tc_fd_);
     tc_ibuf_.clear();

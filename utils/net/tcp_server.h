@@ -29,7 +29,7 @@ public:
     EventLoop* getNextLoop();
     void start();
     void doClean(const TcpConnSP& tcp_conn);
-    void setTcpConnTimeoutMs(int ms) { ts_tcp_conn_timeout_ms = ms; }
+    void setTcpConnTimeoutMs(int ms) { ts_tcp_conn_timeout_ms_ = ms; }
     void setConnectedCb(const ConnectionCallback& cb) { ts_connected_cb_ = cb; }
     void setMessageCb(const MessageCallback& cb) { ts_msg_cb_ = cb; }
     void setCloseCb(const CloseCallback& cb) { ts_close_cb_ = cb; }
@@ -44,7 +44,7 @@ private:
         ts_tcp_connections_.emplace_back(tcp_conn);
     }
 
-    void updateConnTimeoutTime(cosnt TcpConnSP& tcp_conn) {
+    void updateConnTimeoutTime(const TcpConnSP& tcp_conn) {
         ts_timer_.cancel(tcp_conn->getTimerId());
         addNewTcpConn(tcp_conn);
     }

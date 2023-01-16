@@ -108,7 +108,7 @@ inline void Epoll::executeCbs(int event_count) {
             else if (ev->write_callback) ev->write_callback();
             else {
                 LOG_INFO("get error, delete fd %d from epoll\n", ep_events_[i].data.fd);
-                epoll_del(ep_events_[i].data.fd);
+                epollDel(ep_events_[i].data.fd);
             }
         }
     }

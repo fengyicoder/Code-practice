@@ -10,6 +10,7 @@ set(SRCS
     echo_server.cpp
     ../../log/pr.cpp
     ../../log/log.cpp
+    ../../threadpool/thread_pool.cpp
 )
 list(APPEND SRCS ${native_source})
 list(APPEND SRCS ${memory_source})

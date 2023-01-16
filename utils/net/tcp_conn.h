@@ -27,12 +27,12 @@ public:
     EventLoop* getLoop() const { return tc_loop_; }
     void addTask();
     void setContext(const std::any& context) { tc_context_ = context; }
-    auto getContext() { return &tc_context_};
+    auto getContext() { return &tc_context_; }
 
     const char* getPeerAddr() { return inet_ntoa(tc_peer_addr_.sin_addr); }
     auto getFd() { return tc_fd_; }
     bool send(const char* data, int len);
-    void setConnetedCb(cosnt ConnectionCallback& cb) { tc_connected_cb_ = cb; }
+    void setConnectedCb(const ConnectionCallback& cb) { tc_connected_cb_ = cb; }
     void setMessageCb(const MessageCallback& cb) { tc_message_cb_ = cb; }
     void setCloseCb(const CloseCallback& cb) { tc_close_cb_ = cb; }
 
@@ -54,7 +54,7 @@ private:
     int tc_timer_id{-1};
 
     struct sockaddr_in tc_peer_addr_;
-    socklen_t tc_peer_addrlen;
+    socklen_t tc_peer_addrlen_;
 
     OutputBuffer tc_obuf_;
     InputBuffer tc_ibuf_;
@@ -64,4 +64,4 @@ private:
     ConnectionCallback tc_connected_cb_;
     MessageCallback tc_message_cb_;
     CloseCallback tc_close_cb_;
-}
+};

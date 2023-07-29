@@ -68,9 +68,48 @@ void IIpcWorkBase::Loop() {
     for(;;) {
         int timeout(-1);
         pollfd fds[2];
+        fds[0].fd = pipefds_[0];
+        fds[0].events = POLLIN;
+        fds[1].fd = fd_;
+        if (work_type_ == IPC_WORK_TYPE::IPC_WORK_TYPE_READ) {
+            fds[1].events = POLLIN;
+            timeout = -1;
+        }
+        else if(work_type_ == IPC_WORK_TYPE::IPC_WORK_TYPE_WRITE) {
+            fds[1].events = POLLOUT;
+            timeout = -1;
+        }
+        else break;
+        int rc = ::poll(fds, (sizefo(fds) / sizeof(fds[0])), timeout);
+        if (-1 == rc) {
+            if (EINTR == errno) {
+                fprintf(stderr, "poll error, errono = EINTR");
+                continue;
+            }
+        }
+        else if (0 == rc) continue;
+        if (fds[0].revents & POLLIN) {
+            fprintf(stderr, "normal exit");
+            break;
+        }
+        else if (fds[1].revents & (POLLERR | POLLHUP)) {
+            fprintf(stderr, "abnormal exit");
+            break;
+        }
+        else if ((fds[1].revents & POLLIN) && (work_type_ == IPC_WORK_TYPE::IPC_WORK_TYPE_READ) ||
+                (fds[1].revents & POLLOUT) && (work_type_ == IPC_WORK_TYPE::IPC_WORK_TYPE_WRITE)) {
+            if(!ProcessData()) {
+                fprintf(stderr, "process data return false");
+                break;
+            }
+        }
     }
 }
 
 void IIpcWorkBase::Start() {
     thread_ = std::thread(Loop(), this);
+}
+
+void IIpcWorkBase::Stop() {
+    thread_.join();
 }

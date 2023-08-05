@@ -15,16 +15,9 @@ struct Expression
 struct DoubleExpression: Expression
 {
     double value;
-    explicit DoubleExpression(const double value): value{value} {}
-    void print(ostringstream& oss) override
-    {
-        oss << "(";
-        left->print(oss);
-        oss << "+";
-        right->print(oss);
-        oss << ")";
-    }
+    explicit DoubleExpression(const double value) : value{value} {}
 };
+
 
 struct AdditionExpression: Expression
 {
@@ -36,6 +29,15 @@ struct AdditionExpression: Expression
     {
         delete left;
         delete right;
+    }
+
+    void print(ostringstream& oss) override
+    {
+        oss << "(";
+        left->print(oss);
+        oss << "+";
+        right->print(oss);
+        oss << ")";
     }
 };
 
